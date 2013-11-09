@@ -1,0 +1,26 @@
+<h1>{{ device.device_name }}</h1>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action="{% url 'devices:detail' device.id %}" method="post">
+{% csrf_token %}
+<label for="device_name">Device name</label>
+{{ form.device_name }}
+<br>
+<label for="device_desc">Device description</label>
+{{ form.device_desc }}
+<br>
+<label for="device_created">Created</label>
+{{ form.create_date }}
+<br>
+<label for="device_settings">Settings</label>
+{{ form.rs232_settings }}
+<br>
+<label for="last_sent_command">Last sent command</label>
+{{ form.last_sent_command }}
+<br>
+<label for="command_to_send">Command to send</label>
+{{ form.command_to_send }}
+<input type="submit" value="Send" />
+</form>
+<br>
+<br>
+<a href="/devices/">Back</a>
