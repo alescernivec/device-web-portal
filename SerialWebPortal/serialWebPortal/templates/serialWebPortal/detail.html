@@ -1,5 +1,10 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'serialWebPortal/style.css' %}" />
+
 <h1>{{ device.device_name }}</h1>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<div class="container">
 <form action="{% url 'devices:detail' device.id %}" method="post">
 {% csrf_token %}
 <label for="device_name">Device name</label>
@@ -21,6 +26,7 @@
 {{ form.command_to_send }}
 <input type="submit" value="Send" />
 </form>
+</div>
 <br>
 <br>
 <a href="/devices/">Back</a>

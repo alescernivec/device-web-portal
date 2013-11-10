@@ -1,0 +1,17 @@
+li a {
+    color: green;
+}
+
+body {
+    background: white url("images/background.gif") 
+}
+
+.container {
+        width: 500px;
+        clear: both;
+}
+
+.container input {
+        width: 100%;
+        clear: both;
+}

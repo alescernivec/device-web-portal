@@ -1,3 +1,7 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'serialWebPortal/style.css' %}" />
+
 <b>List of all registered devices:</b>
 {% if latest_device_list %}
     <ul>

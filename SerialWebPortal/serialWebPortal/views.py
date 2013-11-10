@@ -4,21 +4,20 @@ from serialWebPortal.models import Device
 from serialWebPortal.forms import DeviceForm
 from django.core.urlresolvers import reverse
 
-
-def index(request):
+def IndexView(request):
     latest_device_list = Device.objects.all()
     context = {'latest_device_list': latest_device_list}
     return render(request, 'serialWebPortal/index.html', context)
 
-def detail(request, device_id):
+def DetailView(request, device_id):
     device = get_object_or_404(Device, pk=device_id)
     if request.method == 'POST': 
         form = DeviceForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            device.last_sent_command = cd['last_sent_command']
+            device.last_sent_command = cd['command_to_send']
             device.save()
-            return HttpResponseRedirect('/devices/') 
+            return HttpResponseRedirect('/devices/%s' % device_id ) 
     else:
         form = DeviceForm(
             initial={'device_name': device.device_name, 
@@ -33,7 +32,7 @@ def detail(request, device_id):
     })
     #return render(request, 'serialWebPortal/detail.html', {'device': device})
 
-def send_message(request, device_id, message):
+def SendMessageView(request, device_id, message):
     device = get_object_or_404(Device, pk=device_id)
     try:
         # Tukaj pride klic na RS232

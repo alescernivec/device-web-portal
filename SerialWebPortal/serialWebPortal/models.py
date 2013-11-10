@@ -1,4 +1,5 @@
 from django.db import models
+import serial
 
 # Create your models here.
 class Device(models.Model):
