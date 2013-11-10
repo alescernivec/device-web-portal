@@ -1,10 +1,8 @@
-from django.http import Http404
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from serialWebPortal.models import Device
 from serialWebPortal.forms import DeviceForm
-from django.template import RequestContext, loader
+from django.core.urlresolvers import reverse
 
 
 def index(request):
@@ -23,7 +21,12 @@ def detail(request, device_id):
             return HttpResponseRedirect('/devices/') 
     else:
         form = DeviceForm(
-            initial={'device_name': device.device_name, 'device_desc':device.device_desc,'create_date':device.create_date, 'last_sent_command':device.last_sent_command, 'rs232_settings':device.rs232_settings}
+            initial={'device_name': device.device_name, 
+                     'device_desc': device.device_desc,
+                     'create_date': device.create_date, 
+                     'last_sent_command': device.last_sent_command, 
+                     'rs232_settings': device.rs232_settings
+                     }
         )
     return render(request, 'serialWebPortal/detail.html', {
         'form': form,'device': device
